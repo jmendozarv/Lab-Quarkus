@@ -11,7 +11,6 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import lombok.RequiredArgsConstructor;
 import org.acme.reservation.inventory.Car;
 import org.acme.reservation.inventory.InventoryClient;
 import org.acme.reservation.reservation.Reservation;
@@ -27,21 +26,28 @@ import org.jboss.resteasy.reactive.RestQuery;
  * También establece el encabezado Content-Type en application/json.
  * */
 @Produces(MediaType.APPLICATION_JSON)
-@RequiredArgsConstructor
 public class ReservationResource {
+
+
   //Quarkus crea la instancia de ReservationResource para nosotros llamando a este constructor,
   // proporcionándonos las implementaciones de las interfaces
   // ReservationsRepository e InventoryClient que necesitamos (ya que son beans CDI @Singleton).
   private final ReservationsRepository reservationsRepository;
   private final InventoryClient inventoryClient;
 
+  public ReservationResource(ReservationsRepository reservationsRepository,
+                             InventoryClient inventoryClient) {
+    this.reservationsRepository = reservationsRepository;
+    this.inventoryClient = inventoryClient;
+  }
 
   @GET
   @Path("availability")
+  //#3 La llamada HTTP GET a la ruta /reservation/availability invoca este método
   /*
-  * Los dos parámetros del método están anotados con la anotación @RestQuery,
-  * lo que significa que representan los valores de los parámetros de consulta HTTP startDate y endDate,
-  * respectivamente (coincidentes con los nombres de las variables). Los valores deben tener el formato AAAA-MM-DD.
+   * Los dos parámetros del método están anotados con la anotación @RestQuery,
+   * lo que significa que representan los valores de los parámetros de consulta HTTP startDate y endDate,
+   * respectivamente (coincidentes con los nombres de las variables). Los valores deben tener el formato AAAA-MM-DD.
    * */
   public Collection<Car> availability(@RestQuery LocalDate startDate,
                                       @RestQuery LocalDate endDate) {

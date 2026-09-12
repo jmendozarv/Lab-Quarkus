@@ -23,7 +23,7 @@ public class InMemoryReservationsRepository implements ReservationsRepository {
   @Override
   public Reservation save(Reservation reservation) {
     reservation.id =
-        ids.incrementAndGet(); //Asigna un ID único a la reserva que estamos a punto de guardar
+        ids.incrementAndGet(); //Asigna n ID uúnico a la reserva que estamos a punto de guardar
 
     store.add(reservation);
     return reservation;

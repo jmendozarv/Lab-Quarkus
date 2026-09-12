@@ -1,12 +1,10 @@
 package org.acme.reservation.inventory;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-@AllArgsConstructor
 public class Car {
 
   public Long id;
@@ -14,5 +12,11 @@ public class Car {
   public String manufacturer;
   public String model;
 
+  public Car(Long id, String licensePlateNumber, String manufacturer, String model) {
+    this.id = id;
+    this.licensePlateNumber = licensePlateNumber;
+    this.manufacturer = manufacturer;
+    this.model = model;
+  }
 
 }

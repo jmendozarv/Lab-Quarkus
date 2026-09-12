@@ -24,7 +24,9 @@ public class Reservation {
         this.startDay.isAfter(endDay)));
   }
 
-
-
+  public Long getCardId() {
+    return cardId;
+  }
 
 }
+
